@@ -2,9 +2,9 @@
 
 namespace app\admin\controller;
 
-use think\Controller;
 
-class Entry extends Controller
+
+class Entry extends Common
 {
     /*
      * 登录成功后的首页

@@ -11,6 +11,9 @@ class Login extends Controller
      * @return mixed
      */
     public function index(){
+        //测试数据库连接
+        $data = db('admin')->find(1);
+        dump($data);
         return $this->fetch('login');
     }
 }
