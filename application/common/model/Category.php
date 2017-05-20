@@ -3,6 +3,7 @@
 namespace app\common\model;
 
 use houdunwang\arr\Arr;
+
 use think\Model;
 
 class Category extends Model
@@ -25,4 +26,5 @@ class Category extends Model
     {
         return Arr::tree($this->order('n_sort')->select(),'v_cat_name',$fieldPri='n_id',$fieldPid='n_pid');
     }
+
 }
