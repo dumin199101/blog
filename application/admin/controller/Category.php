@@ -16,8 +16,9 @@ class Category extends Controller
 
     //栏目管理
     public function index(){
-        $category_list = db('category')->select();
+//        $category_list = db('category')->select();
 //        halt($category_list);
+        $category_list = $this->db->getAll();
         $this->assign('category_list',$category_list);
         return $this->fetch();
     }

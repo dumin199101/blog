@@ -2,6 +2,8 @@
 
 namespace app\common\model;
 
+use houdunwang\arr\Arr;
+
 use think\Model;
 
 class Category extends Model
@@ -18,4 +20,11 @@ class Category extends Model
         }
         return ['valid'=>1,'msg'=>'栏目添加成功'];
     }
+
+    //获得树状列表：
+    public function getAll()
+    {
+        return Arr::tree($this->order('n_sort')->select(),'v_cat_name',$fieldPri='n_id',$fieldPid='n_pid');
+    }
+
 }
