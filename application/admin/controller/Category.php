@@ -56,4 +56,26 @@ class Category extends Controller
             return $this->fetch('addSon');
         }
     }
+
+    //栏目修改
+    public function edit(){
+        if(request()->isPost()){
+            $res = $this->db->edit(input('post.'));
+            if($res['valid']==1){
+                $this->success($res['msg'],'index');
+            }else{
+                $this->error($res['msg']);
+            }
+        }else{
+            //获取旧数据
+            $cate_id = input('param.cate_id');
+            $old_data = $this->db->find($cate_id);
+            //查找非当前栏目的子栏目及当前栏目的数据
+            $cate_list = $this->db->getCatId($cate_id);
+            $this->assign('cate_list',$cate_list);
+            $this->assign('old_data',$old_data);
+            return $this->fetch();
+        }
+
+    }
 }

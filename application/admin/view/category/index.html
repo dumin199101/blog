@@ -28,13 +28,13 @@
                 {foreach name='category_list' key='key' item='vo'}
                 <tr>
                     <td>{$vo['n_id']}</td>
-                    <td>{$vo['v_cat_name']}</td>
+                    <td>{$vo['_v_cat_name']}</td>
                     <td>
                         <div class="btn-group">
                             <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">操作 <span class="caret"></span></button>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li><a href="{:url('addSon',['cate_id'=>$vo['n_id']])}">添加子类</a></li>
-                                <li><a href="">编辑</a></li>
+                                <li><a href="{:url('edit',['cate_id'=>$vo['n_id']])}">编辑</a></li>
                                 <li class="divider"></li>
                                 <li><a href="javascript:;">删除</a></li>
                             </ul>
