@@ -36,7 +36,7 @@
                                 <li><a href="{:url('addSon',['cate_id'=>$vo['n_id']])}">添加子类</a></li>
                                 <li><a href="{:url('edit',['cate_id'=>$vo['n_id']])}">编辑</a></li>
                                 <li class="divider"></li>
-                                <li><a href="javascript:;">删除</a></li>
+                                <li><a href="javascript:;" onclick="del({$vo['n_id']})">删除</a></li>
                             </ul>
                         </div>
                     </td>
@@ -48,4 +48,11 @@
     </div>
 </form>
 <div class="pagination pagination-sm pull-right">
+<script>
+    function del(id){
+        util.confirm('确定删除吗?',function(){
+            location.href = '{:url("del")}'+'?cate_id='+id;
+        })
+    }
+</script>
 {/block}

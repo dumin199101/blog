@@ -78,4 +78,15 @@ class Category extends Controller
         }
 
     }
+    //栏目删除
+    public function del()
+    {
+        $cate_id = input('get.cate_id');
+        $res = $this->db->del($cate_id);
+        if($res['valid']==1){
+            $this->success($res['msg'],'index');
+        }else{
+            $this->error($res['msg']);
+        }
+    }
 }

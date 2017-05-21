@@ -61,4 +61,17 @@ class Category extends Model
         }
     }
 
+    //删除栏目：
+    public function del($id)
+    {
+        //删除栏目后，将子集数据向上提升一级
+        $pid = $this->where('n_id',$id)->value('n_pid');
+        $this->where('n_pid',$id)->update(['n_pid'=>$pid]);
+        //删除
+        if(Category::destroy($id)){
+            return ['valid'=>1,'msg'=>'数据删除成功'];
+        }else{
+            return ['valid'=>0,'msg'=>$this->getError()];
+        }
+    }
 }
