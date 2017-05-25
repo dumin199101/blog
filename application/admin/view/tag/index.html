@@ -33,9 +33,9 @@
                         <div class="btn-group">
                             <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">操作 <span class="caret"></span></button>
                             <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="">编辑</a></li>
+                                <li><a href="{:url('store',['tag_id'=>$vo['n_id']])}">编辑</a></li>
                                 <li class="divider"></li>
-                                <li><a href="javascript:;">删除</a></li>
+                                <li><a href="javascript:;" onclick="del({$vo['n_id']})">删除</a></li>
                             </ul>
                         </div>
                     </td>
@@ -49,4 +49,11 @@
 <div class="pagination pagination-sm pull-right">
      {$list->render()}
 </div>
+<script>
+    function del(tag_id){
+        util.confirm('你确定要删除么?', function () {
+            location.href = "{:url('del')}"+"?tag_id="+tag_id;
+        })
+    }
+</script>
 {/block}

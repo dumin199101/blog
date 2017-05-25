@@ -11,9 +11,9 @@ class Tag extends Model
 
     public function store($data){
         //验证数据   //添加
-        $result = $this->validate(true)->save($data);
+        $result = $this->validate(true)->save($data,$data['n_id']);
         if($result){
-             return ['valid'=>1,'msg'=>'添加成功'];
+             return ['valid'=>1,'msg'=>'操作成功'];
         }else{
             return ['valid'=>0,'msg'=>$this->getError()];
         }

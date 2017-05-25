@@ -6,12 +6,20 @@
             标签管理</a>
     </li>
     <li class="active">
+        {if condition='input("param.tag_id")'}
+        <a href="">标签编辑</a>
+        {else/}
         <a href="">标签添加</a>
+        {/if}
     </li>
 </ol>
 <ul class="nav nav-tabs" role="tablist">
-    <li><a href="">标签管理</a></li>
-    <li class="active"><a href="">标签添加</a></li>
+    <li><a href="{:url('index')}">标签管理</a></li>
+    {if condition='input("param.tag_id")'}
+         <li class="active"><a href="">标签编辑</a></li>
+    {else/}
+        <li class="active"><a href="">标签添加</a></li>
+    {/if}
 </ul>
 <form class="form-horizontal" id="form"  action="" method="post">
     <div class="panel panel-default">
@@ -23,10 +31,11 @@
             <div class="form-group">
                 <label for="" class="col-sm-2 control-label">标签名称</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" name="v_tag_name" value="">
+                    <input type="text" class="form-control" name="v_tag_name" value="{$old_data.v_tag_name}">
                 </div>
             </div>
         </div>
+        <input type="hidden" name="n_id" value="{:input('param.tag_id')}" />
     </div>
     <button class="btn btn-primary" type="submit">确定</button>
 </form>
