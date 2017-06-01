@@ -22,13 +22,13 @@
             <div class="form-group">
                 <label for="" class="col-sm-2 control-label">文章标题</label>
                 <div class="col-sm-9">
-                    <input type="text" name="title"  class="form-control" placeholder="文章标题">
+                    <input type="text" name="v_title"  class="form-control" placeholder="文章标题">
                 </div>
             </div>
             <div class="form-group">
                 <label for="" class="col-sm-2 control-label">文章作者</label>
                 <div class="col-sm-9">
-                    <input type="text" name="author"  class="form-control" placeholder="文章作者">
+                    <input type="text" name="v_author"  class="form-control" placeholder="文章作者">
                 </div>
             </div>
             <div class="form-group">
@@ -47,7 +47,7 @@
                 <div class="col-sm-9">
                     {foreach name='tag_list' item='vo'}
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="v_tag_id[]" value="{$vo['n_id']}"> {$vo['v_tag_name']}
+                        <input type="checkbox" name="n_tag_id[]" value="{$vo['n_id']}"> {$vo['v_tag_name']}
                     </label>
                     {/foreach}
                 </div>
@@ -56,7 +56,7 @@
                 <label for="" class="col-sm-2 control-label">缩略图</label>
                 <div class="col-sm-9">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="thumb" readonly="" value="">
+                        <input type="text" class="form-control" name="v_cover_src" readonly="" value="">
                         <div class="input-group-btn">
                             <button onclick="upImage(this)" class="btn btn-default" type="button">选择图片</button>
                         </div>
@@ -75,7 +75,7 @@
                                     data:{name:'后盾人',year:2099},
                                 };
                                 util.image(function (images) {          //上传成功的图片，数组类型 
-                                    $("[name='thumb']").val(images[0]);
+                                    $("[name='v_cover_src']").val(images[0]);
                                     $(".img-thumbnail").attr('src', images[0]);
                                 }, options)
                             });
@@ -92,13 +92,13 @@
             <div class="form-group">
                 <label for="" class="col-sm-2 control-label">文章摘要</label>
                 <div class="col-sm-9">
-                    <textarea type="text" name="digest"  class="form-control" placeholder="文章摘要"></textarea>
+                    <textarea type="text" name="v_digest"  class="form-control" placeholder="文章摘要"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label for=""  class="col-sm-2 control-label">文章内容</label>
                 <div class="col-sm-9">
-                    <textarea id="container" style="height:300px;width:100%;"></textarea>
+                    <textarea id="container" name="v_desc" style="height:300px;width:100%;"></textarea>
                     <script>
                         util.ueditor('container', {hash:2,data:'hd'}, function (editor) {
                             //这是回调函数 editor是百度编辑器实例
