@@ -33,4 +33,24 @@ class Component extends Controller
             echo json_encode(['valid'=>0,'message'=>$file->getError()]);
         }
     }
+
+
+    //获取文件列表
+    public function filesLists() {
+        $db = Db::name( 'attachment' )
+            ->whereIn( 'v_extension', explode( ',', strtolower( input( 'post.extensions' ) ) ) )
+            ->order( 'n_id desc');
+        $Res  = $db->paginate( 32 );
+        $data = [ ];
+        if ( $Res->toArray() ) {
+            foreach ( $Res as $k => $v ) {
+                $data[ $k ]['createtime'] = date( 'Y/m/d', $v['n_create_time'] );
+                $data[ $k ]['size']       =  $v['n_size'];
+                $data[ $k ]['url']        = WEB_ROOT . $v['v_savepath'];
+                $data[ $k ]['path']       = WEB_ROOT . $v['v_savepath'];
+                $data[ $k ]['name']       = $v['v_filename'];
+            }
+        }
+        echo json_encode( [ 'data' => $data, 'page' => $Res->render() ? : '' ] );
+    }
 }
