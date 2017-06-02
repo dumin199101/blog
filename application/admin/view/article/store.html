@@ -47,7 +47,7 @@
                 <div class="col-sm-9">
                     {foreach name='tag_list' item='vo'}
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="n_tag_id[]" value="{$vo['n_id']}"> {$vo['v_tag_name']}
+                        <input type="checkbox" name="tag[]" value="{$vo['n_id']}"> {$vo['v_tag_name']}
                     </label>
                     {/foreach}
                 </div>
