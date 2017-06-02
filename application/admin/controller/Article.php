@@ -16,6 +16,8 @@ class Article extends Controller
 
     //文章首页
     public function index(){
+        $article_data = $this->db->getAll();
+        $this->assign('article_data',$article_data);
         return $this->fetch();
     }
 

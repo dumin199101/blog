@@ -21,21 +21,24 @@
                 <tr>
                     <th width="5%">编号</th>
                     <th>文章名称</th>
-                    <th width="5%">排序</th>
+                    <th>文章作者</th>
+                    <th width="10%">排序</th>
                     <th>所属分类</th>
                     <th>添加时间</th>
                     <th width="200">操作</th>
                 </tr>
                 </thead>
                 <tbody>
+                {foreach name='article_data' item='vo'}
                 <tr>
-                    <td>编号</td>
-                    <td>标题</td>
+                    <td>{$vo.n_id}</td>
+                    <td>{$vo.v_title}</td>
+                    <td>{$vo.v_author}</td>
                     <td>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control"  value="{$vo.n_sort}">
                     </td>
-                    <td>所属分类</td>
-                    <td>1990-10-1</td>
+                    <td>{$vo.v_cat_name}</td>
+                    <td>{:date('Y-m-d',$vo['n_create_time'])}</td>
                     <td>
                         <div class="btn-group">
                             <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">操作 <span class="caret"></span></button>
@@ -47,12 +50,13 @@
                         </div>
                     </td>
                 </tr>
+                {/foreach}
                 </tbody>
             </table>
         </div>
     </div>
 </form>
 <div class="pagination pagination-sm pull-right">
-
+{$article_data->render()}
 </div>
 {/block}

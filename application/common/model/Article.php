@@ -45,4 +45,14 @@ class Article extends Model
             return ['valid'=>0,'msg'=>$this->getError()];
         }
     }
+
+    //获取首页分页数据：
+    public function getAll(){
+        return db('Article')->alias('a')
+            ->join('__CATEGORY__ b','a.n_cat_id = b.n_id')
+            ->field('a.n_id,a.v_title,a.v_author,a.n_create_time,a.n_sort,b.v_cat_name')
+            ->where('a.n_isrecycle=2')
+            ->order('a.n_sort desc,a.n_create_time desc')
+            ->paginate(2);
+    }
 }
