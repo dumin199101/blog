@@ -47,11 +47,11 @@ class Article extends Model
     }
 
     //获取首页分页数据：
-    public function getAll(){
+    public function getAll($isrecycle){
         return db('Article')->alias('a')
             ->join('__CATEGORY__ b','a.n_cat_id = b.n_id')
             ->field('a.n_id,a.v_title,a.v_author,a.n_create_time,a.n_sort,b.v_cat_name')
-            ->where('a.n_isrecycle=2')
+            ->where('a.n_isrecycle=' . $isrecycle)
             ->order('a.n_sort desc,a.n_create_time desc')
             ->paginate(2);
     }
@@ -89,6 +89,17 @@ class Article extends Model
                 (new ArticleTag())->save($tag_data);
             }
             return ['valid'=>1,'msg'=>'修改成功'];
+        }else{
+            return ['valid'=>0,'msg'=>$this->getError()];
+        }
+    }
+    //删除文章：
+    public function del($id){
+        $result = Article::destroy($id);
+        if($result){
+            //删除文章标签表中的数据：
+            (new ArticleTag())->where('n_article_id='. $id)->delete();
+            return ['valid'=>1,'msg'=>'删除成功'];
         }else{
             return ['valid'=>0,'msg'=>$this->getError()];
         }

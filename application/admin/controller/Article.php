@@ -17,7 +17,7 @@ class Article extends Controller
 
     //文章首页
     public function index(){
-        $article_data = $this->db->getAll();
+        $article_data = $this->db->getAll(2);
         $this->assign('article_data',$article_data);
         return $this->fetch();
     }
@@ -94,6 +94,37 @@ class Article extends Controller
             $this->success('删除到回收站成功','index');
         }else{
             $this->error('删除到回收站失败');
+        }
+    }
+
+    //回收站列表
+    public function recycle(){
+        $article_data = $this->db->getAll(1);
+        $this->assign('article_data',$article_data);
+        return $this->fetch();
+    }
+
+    //从回收站恢复数据
+    public function outToRecycle()
+    {
+        $id = input('param.n_id');
+        $res = $this->db->save(['n_isrecycle'=>2],['n_id'=>$id]);
+        if($res){
+            $this->success('数据恢复成功','recycle');
+        }else{
+            $this->error('数据恢复失败');
+        }
+    }
+
+    //删除数据
+    public function del()
+    {
+        $id = input('get.id');
+        $res = $this->db->del($id);
+        if($res['valid']==1){
+            $this->success($res['msg'],'index');
+        }else {
+            $this->error($res['msg']);
         }
     }
 
