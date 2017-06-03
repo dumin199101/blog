@@ -41,4 +41,17 @@ class Article extends Controller
         }
     }
 
+    //修改文章排序：
+    public function changeSort()
+    {
+        if(request()->isAjax()){
+            $res = $this->db->changeSort(input('post.'));
+            if($res['valid']==1){
+                $this->success($res['msg'],'index');
+            }else{
+                $this->error($res['msg']);
+            }
+        }
+    }
+
 }

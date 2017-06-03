@@ -55,4 +55,19 @@ class Article extends Model
             ->order('a.n_sort desc,a.n_create_time desc')
             ->paginate(2);
     }
+    //修改文章排序：
+    public function changeSort($data)
+    {
+        $result = $this->validate([
+            'n_sort'=>'require|between:1,9999',
+        ],[
+            'n_sort.require'=>'文章排序不能为空',
+            'n_sort.between'=>'文章排序必须在1-9999之间'
+        ])->save($data,[$this->pk=>$data['n_id']]);
+        if($result){
+            return ['valid'=>1,'msg'=>'修改成功'];
+        }else{
+            return ['valid'=>0,'msg'=>$this->getError()];
+        }
+    }
 }

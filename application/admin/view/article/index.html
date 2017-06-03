@@ -35,7 +35,7 @@
                     <td>{$vo.v_title}</td>
                     <td>{$vo.v_author}</td>
                     <td>
-                        <input type="text" class="form-control"  value="{$vo.n_sort}">
+                        <input type="text" class="form-control"  value="{$vo.n_sort}" onblur="changeSort(this,{$vo['n_id']})">
                     </td>
                     <td>{$vo.v_cat_name}</td>
                     <td>{:date('Y-m-d',$vo['n_create_time'])}</td>
@@ -59,4 +59,18 @@
 <div class="pagination pagination-sm pull-right">
 {$article_data->render()}
 </div>
+<script>
+    function changeSort(obj,id){
+        var sort = $(obj).val();
+        $.post("{:url('changeSort')}",{n_sort:sort,n_id:id},function(data){
+             if(data.code==1){
+                 //修改成功
+                 util.message(data.msg,'refresh','success');
+             }else{
+                 //修改失败
+                 util.message(data.msg,'back','error');
+             }
+        })
+    }
+</script>
 {/block}
