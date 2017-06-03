@@ -85,4 +85,16 @@ class Article extends Controller
          }
     }
 
+    //删除到回收站
+    public function delToRecycle()
+    {
+        $id = input('param.n_id');
+        $res = $this->db->save(['n_isrecycle'=>1],['n_id'=>$id]);
+        if($res){
+            $this->success('删除到回收站成功','index');
+        }else{
+            $this->error('删除到回收站失败');
+        }
+    }
+
 }
