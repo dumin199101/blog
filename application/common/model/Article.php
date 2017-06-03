@@ -70,4 +70,27 @@ class Article extends Model
             return ['valid'=>0,'msg'=>$this->getError()];
         }
     }
+    //文章修改
+    public function edit($data)
+    {
+        //验证器验证
+        if(empty($data['tag'])){
+            return['valid'=>0,'msg'=>'请选择标签'];
+        }
+        $res = $this->validate(true)->allowField(true)->save($data,[$this->pk=>$data['n_id']]);
+        if($res){
+            //修改标签：先删除再添加
+            (new ArticleTag())->where('n_article_id=' . $data['n_id'])->delete();
+            foreach($data['tag'] as $v){
+                $tag_data = [
+                    'n_article_id'=>$data['n_id'],
+                    'n_tag_id'=>$v
+                ];
+                (new ArticleTag())->save($tag_data);
+            }
+            return ['valid'=>1,'msg'=>'修改成功'];
+        }else{
+            return ['valid'=>0,'msg'=>$this->getError()];
+        }
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace app\admin\controller;
 
+use app\common\model\ArticleTag;
 use app\common\model\Category;
 use think\Controller;
 
@@ -52,6 +53,36 @@ class Article extends Controller
                 $this->error($res['msg']);
             }
         }
+    }
+
+    //文章编辑
+    public function edit(){
+         if(request()->isPost()){
+              $res = $this->db->edit(input('post.'));
+              if($res['valid']==1){
+                  $this->success($res['msg'],'index');
+              }else{
+                  $this->error($res['msg']);
+              }
+         }else{
+             $id = input('param.n_id');
+             //1.获取文章分类信息
+             $cate_list = (new Category())->getAll();
+             $this->assign('cate_list', $cate_list);
+             //2.获取标签数据
+             $tag_list = db('tag')->select();
+             $this->assign('tag_list', $tag_list);
+             //3.获取旧数据
+             $old_data  = $this->db
+                 ->field('v_title,v_author,v_digest,v_desc,v_cover_src,n_cat_id,n_sort')
+                 ->find($id);
+             $this->assign('old_data',$old_data);
+             //4.获取标签数据
+             $tag_data = (new ArticleTag())->where('n_article_id=' . $id)
+                 ->column('n_tag_id');
+             $this->assign('tag_data',$tag_data);
+             return $this->fetch();
+         }
     }
 
 }
