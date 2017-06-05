@@ -33,4 +33,11 @@ class Login extends Controller
             return $this->fetch('login');
         }
     }
+    /**
+     * 退出登录
+     */
+    public function logout(){
+       session(null);
+       $this->success('退出成功','index');
+    }
 }
