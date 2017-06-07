@@ -27,12 +27,12 @@
                 <tbody>
                 {foreach name='field' item='vo'}
                 <tr>
-                    <td>{$vo['webset_id']}</td>
-                    <td>{$vo['webset_name']}</td>
+                    <td>{$vo['n_id']}</td>
+                    <td>{$vo['v_key']}</td>
                     <td>
-                        <input type="text" class="form-control" value="{$vo['webset_value']}" onblur="change(this,{$vo['webset_id']})">
+                        <input type="text" class="form-control" value="{$vo['v_value']}" onblur="change(this,{$vo['n_id']})">
                     </td>
-                    <td>{$vo['webset_des']}</td>
+                    <td>{$vo['v_desc']}</td>
                 </tr>
                 {/foreach}
                 </tbody>
@@ -42,4 +42,16 @@
 </form>
 <div class="pagination pagination-sm pull-right">
 </div>
+<script>
+    function change(obj,id){
+        var v_value = $(obj).val();
+        $.post("{:url('edit')}",{n_id:id,v_value:v_value},function(data){
+             if(data.code){
+                 util.message(data.msg,'refresh','success')
+             }else{
+                 util.message(data.msg,'','error');
+             }
+        },'json');
+    }
+</script>
 {/block}
