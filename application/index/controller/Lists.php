@@ -1,11 +1,12 @@
 <?php
+
 namespace app\index\controller;
 
 use think\Controller;
 
-class Index extends  Controller
+class Lists extends Controller
 {
-    //网站首页
+    //列表页
     public function index()
     {
         return $this->fetch();
