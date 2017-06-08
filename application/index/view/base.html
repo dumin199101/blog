@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1>欢迎来到后盾BLOG教学系统</h1>
+                <h1>{$webset_data['title']}</h1>
             </div>
         </div>
     </div>
@@ -44,10 +44,10 @@
 
                 <div class="collapse navbar-collapse" id="example-navbar-collapse">
                     <ul class="_menu" >
-                        <li class="_active"><a href="index.html">首页</a></li>
-                        <li><a href="">新闻</a></li>
-                        <li><a href="">军事</a></li>
-                        <li><a href="">娱乐</a></li>
+                        <li class="_active"><a href="{:url('index/index/index')}">首页</a></li>
+                        {foreach name='top_cate_data' item='vo'}
+                        <li><a href="{:url('index/lists/index',['id'=>$vo['n_id']])}">{$vo.v_cat_name}</a></li>
+                        {/foreach}
                     </ul>
                 </div>
             </div>
@@ -75,15 +75,17 @@
                 <div class="_widget">
                     <h4>分类列表</h4>
                     <div>
-                        <a href="">娱乐</a>
+                        {foreach name='all_cate_data' item='vo'}
+                        <a href="{:url('index/lists/index',['id'=>$vo['n_id']])}">{$vo.v_cat_name}</a>
+                        {/foreach}
                     </div>
                 </div>
                 <div class="_widget">
                     <h4>标签云</h4>
                     <div class="_tag">
-                        <a href="">PHP</a>
-                        <a href="">PHP</a>
-                        <a href="">PHP</a>
+                        {foreach name='all_tag_data' item='vo'}
+                        <a href="{:url('index/lists/index',['id'=>$vo['n_id']])}">{$vo.v_tag_name}</a>
+                        {/foreach}
                     </div>
                 </div>
 
@@ -96,28 +98,27 @@
         <div class="row">
             <div class="col-sm-4">
                 <h4 class="_title">最新文章</h4>
+                {foreach name='article_data' item='vo'}
                 <div id="" class="_single">
-                    <p><a href="">标题</a></p>
-                    <time>2010年11月06日11:24:16</time>
+                    <p><a href="{:url('index/content/index',['id'=>$vo['n_id']])}">{$vo.v_title}</a></p>
+                    <time>{:date('Y年m月d日H:i:s',$vo['n_create_time'])}</time>
                 </div>
-                <div id="" class="_single">
-                    <p><a href="">标题</a></p>
-                    <time>2010年11月06日11:24:16</time>
-                </div>
+                {/foreach}
             </div>
             <div class="col-sm-4 footer_tag">
                 <div id="">
                     <h4 class="_title">标签云</h4>
-                    <a href="">PHP</a>
-                    <a href="">PHP</a>
-                    <a href="">PHP</a>
+                    {foreach name='all_tag_data' item='vo'}
+                    <a href="{:url('index/lists/index',['id'=>$vo['n_id']])}">{$vo.v_tag_name}</a>
+                    {/foreach}
                 </div>
             </div>
             <div class="col-sm-4">
                 <h4 class="_title">友情链接</h4>
                 <div id="" class="_single">
-                    <p><a href="" target="_blank">百度</a></p>
-                    <p><a href="" target="_blank">百度</a></p>
+                    {foreach name='link_data' item='vo'}
+                    <p><a href="{$vo.v_link}" target="_blank">{$vo.v_title}</a></p>
+                    {/foreach}
                 </div>
             </div>
         </div>

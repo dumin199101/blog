@@ -1,9 +1,7 @@
 <?php
 namespace app\index\controller;
 
-use think\Controller;
-
-class Index extends  Controller
+class Index extends  Common
 {
     //网站首页
     public function index()
