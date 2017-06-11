@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>hdphp教学博客-首页</title>
+    <title>{$webset_data.title}-{$head_conf.title}</title>
     <!--描述和摘要-->
     <meta name="Description" content=""/>
     <meta name="Keywords" content=""/>
@@ -44,9 +44,9 @@
 
                 <div class="collapse navbar-collapse" id="example-navbar-collapse">
                     <ul class="_menu" >
-                        <li class="_active"><a href="{:url('index/index/index')}">首页</a></li>
+                        <li {if condition="!input('param.cat_id')"}class="_active"{/if}><a href="{:url('index/index/index')}">首页</a></li>
                         {foreach name='top_cate_data' item='vo'}
-                        <li><a href="{:url('index/lists/index',['id'=>$vo['n_id']])}">{$vo.v_cat_name}</a></li>
+                        <li {if condition="input('param.cat_id')==$vo['n_id']"}class="_active"{/if}><a href="{:url('index/lists/index',['cat_id'=>$vo['n_id']])}">{$vo.v_cat_name}</a></li>
                         {/foreach}
                     </ul>
                 </div>
@@ -76,7 +76,7 @@
                     <h4>分类列表</h4>
                     <div>
                         {foreach name='all_cate_data' item='vo'}
-                        <a href="{:url('index/lists/index',['id'=>$vo['n_id']])}">{$vo.v_cat_name}</a>
+                        <a href="{:url('index/lists/index',['cat_id'=>$vo['n_id']])}">{$vo.v_cat_name}</a>
                         {/foreach}
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                     <h4>标签云</h4>
                     <div class="_tag">
                         {foreach name='all_tag_data' item='vo'}
-                        <a href="{:url('index/lists/index',['id'=>$vo['n_id']])}">{$vo.v_tag_name}</a>
+                        <a href="{:url('index/lists/index',['tag_id'=>$vo['n_id']])}">{$vo.v_tag_name}</a>
                         {/foreach}
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                 <h4 class="_title">最新文章</h4>
                 {foreach name='article_data' item='vo'}
                 <div id="" class="_single">
-                    <p><a href="{:url('index/content/index',['id'=>$vo['n_id']])}">{$vo.v_title}</a></p>
+                    <p><a href="{:url('index/content/index',['article_id'=>$vo['n_id']])}">{$vo.v_title}</a></p>
                     <time>{:date('Y年m月d日H:i:s',$vo['n_create_time'])}</time>
                 </div>
                 {/foreach}
@@ -109,7 +109,7 @@
                 <div id="">
                     <h4 class="_title">标签云</h4>
                     {foreach name='all_tag_data' item='vo'}
-                    <a href="{:url('index/lists/index',['id'=>$vo['n_id']])}">{$vo.v_tag_name}</a>
+                    <a href="{:url('index/lists/index',['tag_id'=>$vo['n_id']])}">{$vo.v_tag_name}</a>
                     {/foreach}
                 </div>
             </div>

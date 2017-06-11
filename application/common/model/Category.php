@@ -39,7 +39,7 @@ class Category extends Model
         return Arr::tree($data,'v_cat_name',$fieldPri='n_id',$fieldPid='n_pid');
     }
 
-    private function getSon($data,$cate_id){
+    public function getSon($data,$cate_id){
         static $temp = [];
         foreach($data as $v){
             if($v['n_pid']==$cate_id){

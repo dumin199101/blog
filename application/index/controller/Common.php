@@ -59,6 +59,7 @@ class Common extends Controller
     private function loadArticleData()
     {
         return db('article')
+            ->where('n_isrecycle',2)
             ->order('n_create_time desc')
             ->limit(3)
             ->select();
