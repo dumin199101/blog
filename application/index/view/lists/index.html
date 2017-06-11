@@ -12,34 +12,35 @@
 								</span>
     </div>
 </article>
+{foreach name='article_datas' item='vo'}
 <article>
     <div class="_head">
-        <h1>标题</h1>
+        <h1>{$vo.v_title}</h1>
 								<span>
 								作者：
-								admin
+								{$vo.v_author}
 								</span>
         •
         <!--pubdate表⽰示发布⽇日期-->
-        <time pubdate="pubdate" datetime="">2015年11月06日11:34:39</time>
+        <time pubdate="pubdate" datetime="">{:date('Y-m-d H:i:s',$vo['n_create_time'])}</time>
         •
         分类：
-        <a href="">新闻</a>
+        <a href="{:url('index/lists/index',['cat_id'=>$vo['n_cat_id']])}">{$vo.v_cat_name}</a>
     </div>
     <div class="_digest">
-        <img src="__STATIC__/index/images/1.jpg"  class="img-responsive"/>
+        <img src="{$vo['v_cover_src']}"  class="img-responsive"/>
         <p>
-            摘要
+            {$vo.v_digest}
         </p>
     </div>
     <div class="_more">
-        <a href="" class="btn btn-default">阅读全文</a>
+        <a href="{:url('index/content/index',['article_id'=>$vo['n_id']])}" class="btn btn-default">阅读全文</a>
     </div>
     <div class="_footer">
         <i class="glyphicon glyphicon-tags"></i>
-        <a href="">php</a>、
-        <a href="">php</a>、
-        <a href="">php</a>、
-    </div>
+        {foreach name='$vo["tags"]' item='v'}
+        <a href="{:url('index/lists/index',['tag_id'=>$vo['n_id']])}">{$v.v_tag_name}</a>、
+        {/foreach}
 </article>
+{/foreach}
 {/block}
