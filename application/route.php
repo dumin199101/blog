@@ -17,5 +17,14 @@ return [
         ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
         ':name' => ['index/hello', ['method' => 'post']],
     ],
+    '[c]'     => [
+        ':cat_id'   => ['index/lists/index', ['method' => 'get']],
+    ],
+    '[t]'     => [
+        ':tag_id'   => ['index/lists/index', ['method' => 'get']],
+    ],
+    '[work]'     => [
+        ':article_id'   => ['index/content/index', ['method' => 'get']],
+    ],
 
 ];

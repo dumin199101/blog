@@ -13,6 +13,8 @@ class Content extends Common
         $this->assign('head_conf',$head_conf);
         $id = input('param.article_id');
         if($id){
+            //浏览量
+            db('article')->where('n_id',$id)->setInc('n_browse_count');
             //文章数据
             $article = db('article')->alias('a')
                             ->where('a.n_isrecycle',2)
