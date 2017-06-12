@@ -18,13 +18,13 @@ return [
         ':name' => ['index/hello', ['method' => 'post']],
     ],
     '[c]'     => [
-        ':cat_id'   => ['index/lists/index', ['method' => 'get']],
+        ':cat_id'   => ['index/lists/index', ['method' => 'get'],['cat_id' => '\d+']],
     ],
     '[t]'     => [
-        ':tag_id'   => ['index/lists/index', ['method' => 'get']],
+        ':tag_id'   => ['index/lists/index', ['method' => 'get'],['tag_id' => '\d+']],
     ],
     '[work]'     => [
-        ':article_id'   => ['index/content/index', ['method' => 'get']],
+        ':article_id'   => ['index/content/index', ['method' => 'get'],['article_id' => '\d+']],
     ],
 
 ];
